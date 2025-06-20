@@ -10817,7 +10817,8 @@ Main = (function()
 					Main.DepsVersionData[1] = ""
 				end
 			end
-			rawAPI = rawAPI or game:HttpGet("http://setup.roblox.com/"..Main.RobloxVersion.."-API-Dump.json")
+			rawAPI = rawAPI or game:GetService("HttpService"):JSONDecode("{}")
+
 		else
 			if script:FindFirstChild("API") then
 				rawAPI = require(script.API)
