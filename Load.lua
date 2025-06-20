@@ -11517,11 +11517,14 @@ rawAPI = rawAPI or game:HttpGet("http://setup.roblox.com/" .. Main.RobloxVersion
 		Lib.FastWait()
 		
 		-- Save external deps locally if needed
-		if Main.Elevated and env.writefile and not Main.LocalDepsUpToDate() then
-			env.writefile("dex/deps_version.dat",Main.ClientVersion.."\n"..Main.RobloxVersion)
-			env.writefile("dex/rbx_api.dat",Main.RawAPI)
-			env.writefile("dex/rbx_rmd.dat",Main.RawRMD)
-		end
+		Main.ClientVersion = Main.ClientVersion or "UnknownClientVersion"
+Main.RobloxVersion = Main.RobloxVersion or "UnknownRobloxVersion"
+
+if Main.Elevated and env.writefile and not Main.LocalDepsUpToDate() then
+	env.writefile("dex/deps_version.dat", Main.ClientVersion .. "\n" .. Main.RobloxVersion)
+	env.writefile("dex/rbx_api.dat", Main.RawAPI or "")
+	env.writefile("dex/rbx_rmd.dat", Main.RawRMD or "")
+end
 		
 		-- Load other modules
 		intro.SetProgress("Loading Modules",0.75)
